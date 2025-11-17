@@ -1,6 +1,6 @@
 import os.path
 
-from playwright.sync_api import Page ,expect
+from playwright.sync_api import Page, expect
 # def test_link(page: Page):
 #     page.goto("/demo/link",wait_until="networkidle")
 #     page.get_by_text("本页跳转到百度").click()
