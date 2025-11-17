@@ -131,11 +131,15 @@ from playwright.sync_api import Page, expect
 #     page.goto("http://taobao.com")
 #     assert page.locator('[aria-label="查看更多"]').filter(has_text="工业品").get_by_role("link").all_text_contents()[-1]=="定制"
 
-def test_baidu_search(page: Page):
-    page.goto("https://www.baidu.com")
-    page.locator('#kw').fill('playwright')
-    page.locator('#su').click()
-    expect(page.locator('text=playwright')).to_be_visible()
+def test_baidu_search():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto("https://www.baidu.com")
+        page.locator('#kw').fill('playwright')
+        page.locator('#su').click()
+        assert page.locator('text=playwright').is_visible()
+        browser.close()
 
 
 # def test_and_or_visible(page: Page):
