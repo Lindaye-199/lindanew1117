@@ -127,9 +127,16 @@ from playwright.sync_api import Page ,expect
 #     expect(page.locator(".tbh-service.J_Module>div>div")).to_have_count(1)
 #     expect(page.locator(".tbh-service.J_Module ul")).to_have_count(1)
 
-def test_filter(page: Page):
-    page.goto("http://taobao.com")
-    assert page.locator('[aria-label="查看更多"]').filter(has_text="工业品").get_by_role("link").all_text_contents()[-1]=="定制"
+# def test_filter(page: Page):
+#     page.goto("http://taobao.com")
+#     assert page.locator('[aria-label="查看更多"]').filter(has_text="工业品").get_by_role("link").all_text_contents()[-1]=="定制"
+
+def test_baidu_search(page: Page):
+    page.goto("https://www.baidu.com")
+    page.locator('#kw').fill('playwright')
+    page.locator('#su').click()
+    expect(page.locator('text=playwright')).to_be_visible()
+
 
 # def test_and_or_visible(page: Page):
 #     page.goto("http://taobao.com")
